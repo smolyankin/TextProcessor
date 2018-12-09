@@ -5,6 +5,13 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextProcessor", "TextProcessor\TextProcessor.csproj", "{03EBD1F5-5C79-4471-8914-5CF05ECEEBBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextProcessor.Admin", "TextProcessor.Admin\TextProcessor.Admin.csproj", "{189513DA-7B8F-4D50-8DFC-2851403E90DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{03EBD1F5-5C79-4471-8914-5CF05ECEEBBD} = {03EBD1F5-5C79-4471-8914-5CF05ECEEBBD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextProcessor.Client", "TextProcessor.Client\TextProcessor.Client.csproj", "{13848EC3-95EE-4B5D-AB96-5C3D22E8C744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,14 @@ Global
 		{03EBD1F5-5C79-4471-8914-5CF05ECEEBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03EBD1F5-5C79-4471-8914-5CF05ECEEBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03EBD1F5-5C79-4471-8914-5CF05ECEEBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189513DA-7B8F-4D50-8DFC-2851403E90DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189513DA-7B8F-4D50-8DFC-2851403E90DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189513DA-7B8F-4D50-8DFC-2851403E90DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189513DA-7B8F-4D50-8DFC-2851403E90DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13848EC3-95EE-4B5D-AB96-5C3D22E8C744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13848EC3-95EE-4B5D-AB96-5C3D22E8C744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13848EC3-95EE-4B5D-AB96-5C3D22E8C744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13848EC3-95EE-4B5D-AB96-5C3D22E8C744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
