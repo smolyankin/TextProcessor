@@ -5,7 +5,7 @@ namespace TextProcessor.Admin
 {
     class Program
     {
-        private static string message = string.Empty;
+        private static string message = string.Empty; //сообщение пользователю
 
         [STAThread]
         static void Main(string[] args)
@@ -28,9 +28,7 @@ namespace TextProcessor.Admin
                     case 2:
                         Console.WriteLine("Очистить словарь? (Y)es / No");
                         if (Console.ReadKey().Key == ConsoleKey.Y)
-                        {
                             message = service.ClearDictionary().GetAwaiter().GetResult();
-                        }
                         else
                             message = "Словарь не очищен. Нажмите любую кнопку для выхода";
                         break;
@@ -38,19 +36,23 @@ namespace TextProcessor.Admin
             }
             else
             {
-                ReadLine(service);
+                NoArgs(service);
             }
             Console.WriteLine(message);
             Console.ReadKey();
         }
 
-        private static void ReadLine(Service service)
+        /// <summary>
+        /// работа со словарем без аргументов
+        /// </summary>
+        /// <param name="service">сервис</param>
+        private static void NoArgs(Service service)
         {
-            Console.WriteLine(@"Вы можете запустить приложение с аргументами: 0 - создание словаря, 1 - обновление словаря, 2 - очистка словаря\r\n
-                                1 Создать словарь\r\n
-                                2 Обновить словарь\r\n
-                                3 Очистить словарь\r\n
-                                Вы можете продолжить выбрав один из пунктов либо выйти из программы.");
+            Console.WriteLine(@"Вы можете запустить приложение с аргументами: 0 - создание словаря, 1 - обновление словаря, 2 - очистка словаря
+1 Создать словарь
+2 Обновить словарь
+3 Очистить словарь
+Вы можете продолжить выбрав один из пунктов либо выйти из программы.");
             var input = Console.ReadKey();
 
             switch (input.Key)
@@ -64,11 +66,9 @@ namespace TextProcessor.Admin
                 case ConsoleKey.D3:
                     Console.WriteLine("\r\nОчистить словарь? (Y)es / No");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
-                    {
                         message = service.ClearDictionary().GetAwaiter().GetResult();
-                    }
                     else
-                        Console.WriteLine("Словарь не очищен. Нажмите любую кнопку для выхода");
+                        message = "Словарь не очищен. Нажмите любую кнопку для выхода";
                     break;
             }
         }

@@ -3,13 +3,19 @@ using TextProcessor.Models;
 
 namespace TextProcessor.Context
 {
+    /// <summary>
+    /// контекст для работы с бд
+    /// </summary>
     public class WordContext : DbContext
     {
         public WordContext() : base("DBConnection")
         {
-            //Database.SetInitializer<WordContext>(null);
+            
         }
 
+        /// <summary>
+        /// таблица слов
+        /// </summary>
         public DbSet<Word> Words { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace TextProcessor.Client
     {
         static void Main(string[] args)
         {
-            int port = 5000;
-            string server = "127.0.0.1";
+            int port = 5000; //порт по умолчанию
+            string server = "127.0.0.1"; //ип адрес по умолчанию
             if (args.Length >= 1)
             {
                 try
@@ -29,7 +29,7 @@ namespace TextProcessor.Client
                         }
                     }
 
-                    if (args.Length == 2)
+                    if (args.Length >= 2)
                     {
                         int.TryParse(args[1], out int newPort);
                         if (newPort > 0 && newPort <= 65535)
@@ -55,6 +55,8 @@ namespace TextProcessor.Client
                     NetworkStream stream = client.GetStream();
                     Console.WriteLine("Введите запрос:");
                     var search = Console.ReadLine();
+                    if (string.IsNullOrEmpty(search))
+                        continue;
                     Byte[] sendBytes = Encoding.UTF8.GetBytes(search);
                     stream.Write(sendBytes, 0, sendBytes.Length);
                     do
