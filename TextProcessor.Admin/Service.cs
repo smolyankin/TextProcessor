@@ -27,17 +27,14 @@ namespace TextProcessor.Admin
                 dialog.ShowDialog();
                 var text = File.ReadAllText(dialog.FileName);
                 //записать данные в бд
-                text = Regex.Replace(text, @"[\u0020-\u007E\u00A0-\u00FF]", " ");
-                text = text.Replace("\r", " ");
-                text = text.Replace("\n", " ");
-                text = text.Replace("\t", " ");
+                text = Regex.Replace(text, "[\u0020-\u007E\u00A0-\u00FF\\r\\n\\t]", " ");
                 var textArray = text.Split(' ').ToList();
-                textArray.ForEach(x => x = x.Trim().ToLowerInvariant());
+                textArray.RemoveAll(x => string.IsNullOrEmpty(x));
                 var words = textArray.Where(x => x.Length <= 15 && x.Length >= 3).ToList();
                 var mylist = new List<string>();
                 foreach (var word in words)
                     if (!String.IsNullOrEmpty(word) || !String.IsNullOrWhiteSpace(word))
-                        mylist.Add(word);
+                        mylist.Add(word.ToLowerInvariant());
                 var group = mylist.GroupBy(g => g);
                 long i = 0;
                 var list = new List<Word>();
@@ -50,7 +47,7 @@ namespace TextProcessor.Admin
                     });
                     var l = Console.CursorLeft;
                     var t = Console.CursorTop;
-                    Console.Write(i * 100 / group.Count() + " %");
+                    Console.Write(i * 100 / group.Where(w => w.LongCount() >= 3).Count() + " %");
                     Console.SetCursorPosition(l, t);
                     i++;
                 }
@@ -81,17 +78,14 @@ namespace TextProcessor.Admin
                 dialog.ShowDialog();
                 var text = File.ReadAllText(dialog.FileName);
                 //записать данные в бд
-                text = Regex.Replace(text, @"[\u0020-\u007E\u00A0-\u00FF]", " ");
-                text = text.Replace("\r", " ");
-                text = text.Replace("\n", " ");
-                text = text.Replace("\t", " ");
+                text = Regex.Replace(text, "[\u0020-\u007E\u00A0-\u00FF\\r\\n\\t]", " ");
                 var textArray = text.Split(' ').ToList();
-                textArray.ForEach(x => x = x.Trim().ToLowerInvariant());
+                textArray.RemoveAll(x => string.IsNullOrEmpty(x));
                 var words = textArray.Where(x => x.Length <= 15 && x.Length >= 3).ToList();
                 var mylist = new List<string>();
                 foreach (var word in words)
                     if (!String.IsNullOrEmpty(word) || !String.IsNullOrWhiteSpace(word))
-                        mylist.Add(word);
+                        mylist.Add(word.ToLowerInvariant());
                 var group = mylist.GroupBy(g => g);
                 long i = 0;
                 var list = new List<Word>();
@@ -113,7 +107,7 @@ namespace TextProcessor.Admin
                     }
                     var l = Console.CursorLeft;
                     var t = Console.CursorTop;
-                    Console.Write(i * 100 / group.Count() + " %");
+                    Console.Write(i * 100 / group.Where(w => w.LongCount() >= 3).Count() + " %");
                     Console.SetCursorPosition(l, t);
                     i++;
                 }

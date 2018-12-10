@@ -32,7 +32,7 @@ namespace TextProcessor.Admin
                             message = service.ClearDictionary().GetAwaiter().GetResult();
                         }
                         else
-                            message = "Словарь не очищен. Нажмите любую кнопку для выхода");
+                            message = "Словарь не очищен. Нажмите любую кнопку для выхода";
                         break;
                 }
             }
@@ -71,9 +71,6 @@ namespace TextProcessor.Admin
                         Console.WriteLine("Словарь не очищен. Нажмите любую кнопку для выхода");
                     break;
             }
-
-            Console.WriteLine(message);
-            Console.ReadKey();
         }
     }
 }
