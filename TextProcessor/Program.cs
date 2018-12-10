@@ -13,9 +13,24 @@ namespace TextProcessor
         static void Main(string[] args)
         {
             TcpListener server = null;
+            var port = 5000; //порт по умолчанию
+
             try
             {
-                var port = 5000; //порт по умолчанию
+                if (args.Length >= 1)
+                {
+                    try
+                    {
+                        int.TryParse(args[0], out int newPort);
+                        if (newPort > 0 && newPort <= 65535)
+                            port = newPort;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                }
                 server = new TcpListener(IPAddress.Any, port);
                 server.Start();
 

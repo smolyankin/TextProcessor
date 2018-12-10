@@ -28,6 +28,8 @@ namespace TextProcessor.Admin
                 if (exist != null && exist.Any())
                     return "Словарь не пуст. Для создания нового словаря сперва очистите старый.";
                 var words = await WordsFromFile();
+                if (!words.Any())
+                    return "Файл не был выбран или в файле не было подходящих слов";
                 var group = words.GroupBy(g => g);
                 long i = 0;
                 var list = new List<Word>();
@@ -61,6 +63,8 @@ namespace TextProcessor.Admin
                 Console.WriteLine("\r\n");
                 var exist = db.Words.ToList();
                 var words = await WordsFromFile();
+                if (!words.Any())
+                    return "Файл не был выбран или в файле не было подходящих слов";
                 var group = words.GroupBy(g => g);
                 long i = 0;
                 var list = new List<Word>();
@@ -115,7 +119,10 @@ namespace TextProcessor.Admin
         private async Task<List<string>> WordsFromFile()
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "TXT files (*.txt)|*.txt";
             dialog.ShowDialog();
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return new List<string>();
             var text = File.ReadAllText(dialog.FileName);
             text = Regex.Replace(text, "[\u0020-\u007E\u00A0-\u00FF\\r\\n\\t]", " ");
             var textArray = text.Split(' ').ToList();
